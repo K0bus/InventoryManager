@@ -1,4 +1,4 @@
 name: InventoryManager
-version: '1.0-SNAPSHOT'
+version: '${project.version}'
 main: fr.k0bus.inventoryManager.InventoryManager
 api-version: '1.21'

@@ -1,11 +1,10 @@
 package fr.k0bus.inventoryManager;
 
-import org.bukkit.GameMode;
-import org.bukkit.World;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
 
 public class IMEvents implements Listener {
@@ -19,19 +18,33 @@ public class IMEvents implements Listener {
 
 
     @EventHandler
-    public void onGamemodeChange(PlayerGameModeChangeEvent e)
+    public void onGameModeChange(PlayerGameModeChangeEvent e)
     {
-
+        this.plugin.getData().loadInventory(
+                e.getPlayer(),
+                e.getPlayer().getWorld(),
+                e.getNewGameMode()
+        );
     }
     @EventHandler
     public void onWorldChange(PlayerTeleportEvent e)
     {
-
+        this.plugin.getData().loadInventory(
+                e.getPlayer(),
+                e.getTo().getWorld(),
+                e.getPlayer().getGameMode()
+        );
     }
 
-    public void change(Player player, World world, GameMode gameMode)
+    @EventHandler
+    public void onLogin(PlayerJoinEvent e)
     {
-        String inventory = "default";
-
+        this.plugin.getData().playerLogin(e.getPlayer());
     }
+    @EventHandler
+    public void onLogout(PlayerQuitEvent e)
+    {
+        this.plugin.getData().playerLogout(e.getPlayer());
+    }
+
 }

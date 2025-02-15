@@ -1,0 +1,20 @@
+config-version: 1
+
+server-id: 'default'
+
+inventories:
+  'default':
+    worlds:
+      - 'world'
+      - 'world_nether'
+      - 'world_the_end'
+    gamemode:
+      - 'survival'
+      - 'adventure'
+    strict-server: true
+  'creative':
+    worlds:
+      - '*'
+    gamemode:
+      - 'creative'
+    strict-server: false
