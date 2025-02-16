@@ -3,14 +3,14 @@ pipeline {
     stages {
         tools {
             jdk "JDK_23"
-            maven "MAVEN"
+            //maven "MAVEN"
         }
         stage('Build') {
             steps {
                 sh 'echo "JAVA_HOME=${JAVA_HOME}"'
                 sh 'java -version'
-                sh 'mvn -version'
-                sh 'mvn clean install -B -Dbuild.number=${BUILD_NUMBER}'
+                //sh 'mvn -version'
+                //sh 'mvn clean install -B -Dbuild.number=${BUILD_NUMBER}'
             }
         }
     }
