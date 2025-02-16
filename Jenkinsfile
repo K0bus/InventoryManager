@@ -1,10 +1,10 @@
 pipeline {
     agent any
-    tools {
-        jdk "JDK_23"
-        maven "MAVEN"
-    }
     stages {
+        tools {
+            jdk "JDK_23"
+            maven "MAVEN"
+        }
         stage('Build') {
             steps {
                 sh 'echo "JAVA_HOME=${JAVA_HOME}"'
