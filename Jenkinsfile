@@ -13,7 +13,7 @@ pipeline {
             }
         }
     }
-    post {
+    /*post {
         always {
             archiveArtifacts artifacts: 'target/InventoryManager*.jar', fingerprint: true
             discordSend webhookURL: params.DISCORD_URL,
@@ -26,5 +26,5 @@ pipeline {
                 showChangeset: true,
                 result: currentBuild.currentResult
         }
-    }
+    }*/
 }
