@@ -1,23 +1,16 @@
 pipeline {
-    agent {
-        docker {
-            image "maven:3.9.9-ibm-semeru-21-jammy"
-        }
+    agent any
+    tools {
+        jdk "JDK_23"
+        maven "MAVEN"
     }
     stages {
         stage('Build') {
             steps {
-                sh 'mvn -version'
                 sh 'mvn clean install -B -Dbuild.number=${BUILD_NUMBER}'
             }
         }
     }
-    post {
-        always {
-            cleanWs()
-        }
-    }
-
     /*post {
         always {
             archiveArtifacts artifacts: 'target/InventoryManager*.jar', fingerprint: true
