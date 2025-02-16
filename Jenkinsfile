@@ -6,6 +6,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'mvn -version'
                 sh 'mvn clean install -B -Dbuild.number=${BUILD_NUMBER}'
             }
         }
