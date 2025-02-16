@@ -3,7 +3,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn clean install -B -Dbuild.number=${BUILD_NUMBER}'
+                withMaven(
+                            maven: 'MAVEN', // (1)
+                            mavenLocalRepo: '.repository', // (2)
+                        )
+                        {
+                            sh 'mvn clean install -B -Dbuild.number=${BUILD_NUMBER}'
+                        }
             }
         }
     }
