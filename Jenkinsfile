@@ -2,7 +2,6 @@ pipeline {
     agent {
         docker {
             image "maven:3.9.9-ibm-semeru-21-jammy"
-            label "docker_mvn_21"
         }
     }
     stages {
