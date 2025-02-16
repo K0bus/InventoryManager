@@ -1,11 +1,7 @@
 pipeline {
     agent any
     tools {
-        jdk "JDK_23"
         maven "MAVEN"
-    }
-    environment {
-        JAVA_HOME = "/config/tools/jdk/jdk-23.0.2"
     }
     stages {
         stage('Build') {
