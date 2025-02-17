@@ -11,8 +11,8 @@ pipeline {
                 sh 'cd ${JAVA_HOME}'
                 sh 'ls'
                 sh 'java -version'
-                //sh 'mvn -version'
-                //sh 'mvn clean install -B -Dbuild.number=${BUILD_NUMBER}'
+                sh 'mvn -version'
+                sh 'mvn clean install -B -Dbuild.number=${BUILD_NUMBER}'
             }
         }
     }
