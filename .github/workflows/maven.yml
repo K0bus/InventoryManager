@@ -26,8 +26,14 @@ jobs:
       - name: Build with Maven
         run: mvn clean package
 
-      - name: Run Unit Tests
-        run: mvn test
+      - name: Run Unit Tests with Coverage (JaCoCo)
+        run: mvn test jacoco:report
+
+      - name: Upload JaCoCo Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-report
+          path: target/site/jacoco
 
       - name: Check Code Formatting (Checkstyle)
         run: mvn checkstyle:check
