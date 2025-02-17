@@ -42,7 +42,7 @@ jobs:
       - name: pre-commit
         uses: pre-commit/action@v3.0.0
         with:
-          extra_args: --from-ref "main"
+          extra_args: --from-ref "main" --to-ref "main"
         env:
           SKIP: ${{ github.ref_name == 'main' && 'no-commit-to-branch' || '' }}
 
