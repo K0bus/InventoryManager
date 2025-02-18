@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    tool {
+        maven "3.9.9"
+    }
     options {
         disableConcurrentBuilds()
     }
