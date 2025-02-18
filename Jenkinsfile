@@ -7,12 +7,11 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'echo "JAVA_HOME=${JAVA_HOME}"'
-                sh 'cd ${JAVA_HOME}'
-                sh 'ls'
-                sh 'java -version'
-                sh 'mvn -version'
-                sh 'mvn clean install -B -Dbuild.number=${BUILD_NUMBER}'
+                withEnv([
+                    "PATH+JAVA=${tool 'openjdk-23.0.2'}/bin"
+                ]) {
+                    sh 'mvn clean install -B -Dbuild.number=${BUILD_NUMBER}'
+                }
             }
         }
     }
