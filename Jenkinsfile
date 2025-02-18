@@ -9,14 +9,10 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-            echo "JAVA_HOME ${env.JAVA_HOME}"
-                withEnv([
-                        "JAVA_HOME=${tool 'openjdk-23.0.2'}"
-                ]) {
-                    echo "JAVA_HOME ${env.JAVA_HOME}"
-                    sh 'java -version'
-                    sh 'mvn clean install'
-                }
+                env.JAVA_HOME="${tool 'jdk1.8.0_111'}"
+                env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
+                sh 'java -version'
+                sh 'mvn clean install'
             }
         }
         stage('Archive artifacts') {
