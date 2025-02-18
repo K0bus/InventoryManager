@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                env.JAVA_HOME="${tool 'jdk1.8.0_111'}"
+                env.JAVA_HOME="${tool 'openjdk-23.0.2'}"
                 env.PATH="${env.JAVA_HOME}/bin:${env.PATH}"
                 sh 'java -version'
                 sh 'mvn clean install'
