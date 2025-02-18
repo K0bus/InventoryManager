@@ -7,7 +7,7 @@ pipeline {
         stage('Build') {
             steps {
                 withEnv([
-                        "PATH+JAVA=${tool 'Temurin-21.0.3_9'}/bin"
+                        "PATH+JAVA=${tool 'openjdk-23.0.2'}/bin"
                 ]) {
                     sh 'mvn clean install'
                 }
