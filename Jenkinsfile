@@ -11,7 +11,7 @@ pipeline {
             steps {
             echo "JAVA_HOME ${env.JAVA_HOME}"
                 withEnv([
-                        "JAVA_HOME=${tool 'openjdk-23.0.2'}/bin"
+                        "JAVA_HOME=${tool 'openjdk-23.0.2'}"
                 ]) {
                     echo "JAVA_HOME ${env.JAVA_HOME}"
                     sh 'java -version'
