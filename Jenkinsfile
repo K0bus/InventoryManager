@@ -1,31 +1,35 @@
 pipeline {
     agent any
-    tools {
-        maven "3.9.9"
+    options {
+        disableConcurrentBuilds()
     }
     stages {
         stage('Build') {
             steps {
                 withEnv([
-                    "PATH+JAVA=${tool 'openjdk-23.0.2'}/bin"
+                        "PATH+JAVA=${tool 'Temurin-21.0.3_9'}/bin"
                 ]) {
-                    sh 'mvn clean install -B -Dbuild.number=${BUILD_NUMBER}'
+                    sh 'mvn clean install'
                 }
             }
         }
-    }
-    /*post {
-        always {
-            archiveArtifacts artifacts: 'target/InventoryManager*.jar', fingerprint: true
-            discordSend webhookURL: params.DISCORD_URL,
-                title: "$JOB_NAME #$BUILD_NUMBER",
-                thumbnail: "https://i.imgur.com/iJdYF4k.png",
-                description: "CI Automated in Jenkins",
-                footer: "by K0bus",
-                successful: true,
-                link: env.BUILD_URL,
-                showChangeset: true,
-                result: currentBuild.currentResult
+        stage('Archive artifacts') {
+            steps {
+                sh 'rm -rf artifacts'
+                sh 'mkdir artifacts'
+                sh 'cp target/InventoryManager*.jar artifacts/'
+                archiveArtifacts artifacts: 'artifacts/*.jar', followSymlinks: false
+            }
         }
-    }*/
+        stage('Fingerprint artifacts') {
+            steps {
+                fingerprint 'worldedit-bukkit/build/libs/FastAsyncWorldEdit*.jar'
+            }
+        }
+        stage('Publish JUnit test results') {
+            steps {
+                junit 'worldedit-core/build/test-results/test/*.xml,worldedit-bukkit/build/test-results/test/*.xml'
+            }
+        }
+    }
 }
