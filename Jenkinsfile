@@ -10,7 +10,7 @@ pipeline {
         stage('Build') {
             steps {
                 withEnv([
-                        "PATH+JAVA=${tool 'openjdk-23.0.2'}/bin"
+                        "JAVA_HOME=${tool 'openjdk-23.0.2'}/bin"
                 ]) {
                     sh 'java -version'
                     sh 'mvn clean install'
