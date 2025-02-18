@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    tool {
+    tools {
         maven "3.9.9"
     }
     options {
