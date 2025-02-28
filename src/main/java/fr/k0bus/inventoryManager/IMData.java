@@ -1,6 +1,7 @@
 package fr.k0bus.inventoryManager;
 
 import dev.dejvokep.boostedyaml.block.implementation.Section;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.OfflinePlayer;
@@ -16,6 +17,7 @@ public class IMData {
 
     private final HashMap<UUID, String> playerInventoryMap = new HashMap<>();
 
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public IMData(InventoryManager instance)
     {
         this.plugin = instance;

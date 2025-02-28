@@ -1,5 +1,6 @@
 package fr.k0bus.inventoryManager;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
@@ -11,6 +12,7 @@ public class IMEvents implements Listener {
 
     InventoryManager plugin;
 
+    @SuppressFBWarnings("EI_EXPOSE_REP2")
     public IMEvents(InventoryManager instance)
     {
         this.plugin = instance;

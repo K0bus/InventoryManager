@@ -3,6 +3,7 @@ package fr.k0bus.inventoryManager;
 import dev.dejvokep.boostedyaml.YamlDocument;
 import dev.dejvokep.boostedyaml.dvs.versioning.BasicVersioning;
 import dev.dejvokep.boostedyaml.settings.updater.UpdaterSettings;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -44,6 +45,7 @@ public final class InventoryManager extends JavaPlugin {
         return data;
     }
 
+    @SuppressFBWarnings("EI_EXPOSE_REP")
     public YamlDocument getSettings() {
         return settings;
     }
