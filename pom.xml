@@ -15,37 +15,51 @@
         <java.version>21</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <build.number>SNAPSHOT</build.number>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
 
     <build>
         <defaultGoal>clean package</defaultGoal>
         <plugins>
+            <!-- Enforce Maven version -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireMavenVersion>
+                                    <version>[3.8,)</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Compiler Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.13.0</version>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
                     <release>${java.version}</release>
                 </configuration>
             </plugin>
+
+            <!-- Shade Plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
                 <version>3.5.3</version>
-                <configuration>
-                    <relocations>
-                        <relocation>
-                            <pattern>dev.dejvokep.boostedyaml</pattern>
-                            <shadedPattern>fr.k0bus.inventoryManager.libs</shadedPattern>
-                        </relocation>
-                        <relocation>
-                            <pattern>dev.dejvokep.boostedyaml</pattern>
-                            <shadedPattern>fr.k0bus.inventoryManager.libs</shadedPattern>
-                        </relocation>
-                    </relocations>
-                </configuration>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -59,10 +73,43 @@
                                     <include>dev.dejvokep:boosted-yaml-spigot</include>
                                 </includes>
                             </artifactSet>
+                            <relocations>
+                                <relocation>
+                                    <pattern>dev.dejvokep.boostedyaml</pattern>
+                                    <shadedPattern>fr.k0bus.inventoryManager.libs</shadedPattern>
+                                </relocation>
+                            </relocations>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Surefire Plugin (Unit Tests) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <reportFormat>xml</reportFormat>
+                </configuration>
+            </plugin>
+
+            <!-- Failsafe Plugin (Integration Tests) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.1.2</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- JaCoCo Plugin (Code Coverage) -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -72,7 +119,6 @@
                         <id>prepare-agent</id>
                         <goals>
                             <goal>prepare-agent</goal>
-                            <goal>report</goal>
                         </goals>
                     </execution>
                     <execution>
@@ -84,10 +130,12 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- SpotBugs Plugin (Static Code Analysis) -->
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
-                <version>4.8.3.0</version>
+                <version>4.9.0.0</version>
                 <executions>
                     <execution>
                         <goals>
@@ -96,8 +144,8 @@
                     </execution>
                 </executions>
             </plugin>
-
         </plugins>
+
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -118,12 +166,15 @@
     </repositories>
 
     <dependencies>
+        <!-- Paper API -->
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
             <version>1.21.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- Boosted Yaml -->
         <dependency>
             <groupId>dev.dejvokep</groupId>
             <artifactId>boosted-yaml</artifactId>
@@ -133,6 +184,20 @@
             <groupId>dev.dejvokep</groupId>
             <artifactId>boosted-yaml-spigot</artifactId>
             <version>1.5</version>
+        </dependency>
+
+        <!-- FindBugs Annotation -->
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>annotations</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
+            <version>3.0.1</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>
