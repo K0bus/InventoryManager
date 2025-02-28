@@ -1,4 +1,4 @@
-package fr.k0bus.inventoryManager;
+package fr.k0bus.inventorymanager;
 
 import dev.dejvokep.boostedyaml.block.implementation.Section;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;

@@ -1,4 +1,4 @@
-package fr.k0bus.inventoryManager;
+package fr.k0bus.inventorymanager;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.bukkit.event.EventHandler;

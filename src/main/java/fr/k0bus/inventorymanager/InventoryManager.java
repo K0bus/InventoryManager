@@ -1,4 +1,4 @@
-package fr.k0bus.inventoryManager;
+package fr.k0bus.inventorymanager;
 
 import dev.dejvokep.boostedyaml.YamlDocument;
 import dev.dejvokep.boostedyaml.dvs.versioning.BasicVersioning;
