@@ -1,52 +1,76 @@
 package fr.k0bus.inventorymanager;
 
-import dev.dejvokep.boostedyaml.YamlDocument;
-import dev.dejvokep.boostedyaml.dvs.versioning.BasicVersioning;
-import dev.dejvokep.boostedyaml.settings.updater.UpdaterSettings;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import fr.k0bus.inventorymanager.config.Configuration;
+import fr.k0bus.inventorymanager.database.DatabaseManager;
+import fr.k0bus.inventorymanager.database.InvalidDatabaseTypeException;
+import fr.k0bus.inventorymanager.listener.GamemodeListener;
+import fr.k0bus.inventorymanager.listener.WorldChangeListener;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.Objects;
+import java.sql.SQLException;
 
 public final class InventoryManager extends JavaPlugin {
 
-    private IMData data;
-    private YamlDocument settings;
+    private Configuration configuration;
+    private DatabaseManager databaseManager;
+    private static Logger logger;
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
-        this.getLogger().info("Starting InventoryManager (" + this.getDescription().getVersion() + ")");
-        this.data = new IMData(this);
-        try {
-            this.settings = YamlDocument.create(
-                    new File(getDataFolder(), "config.yml"),
-                    Objects.requireNonNull(getResource("config.yml"))
-            );
-            this.settings.setSettings(
-                    UpdaterSettings.builder().setVersioning(new BasicVersioning("config-version")).build()
-            );
-            this.settings.update();
-        } catch (IOException e) {
-            this.getLogger().severe("Can't write file config.yml. Plugins stop.");
-            this.getServer().getPluginManager().disablePlugin(this);
-        }
-        this.getServer().getPluginManager().registerEvents(new IMEvents(this), this);
+        init();
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        databaseManager.close();
     }
 
-    public IMData getData() {
-        return data;
+    private void init()
+    {
+        try {
+            logger = new Logger(this, false);
+            logger.log("&bStart initialization...");
+            this.configuration = new Configuration(this);
+            if(configuration.isDebugMode())
+            {
+                logger.setDebug(true);
+                logger.debug("&7> &6&lConfiguration loaded");
+            }
+            logger.log("&7> &6&lConfiguration loaded");
+            databaseManager = new DatabaseManager(this);
+            databaseManager.init();
+            databaseManager.setupDatabase();
+            logger.log("&7> &6&lDatabase initialized");
+            getServer().getPluginManager().registerEvents(new GamemodeListener(this), this);
+            getServer().getPluginManager().registerEvents(new WorldChangeListener(this), this);
+            logger.log("&7> &6&lListener registered");
+            logger.log("&aInitialization ended successfully !");
+
+        } catch (IOException | SQLException | InvalidDatabaseTypeException e)
+        {
+            disableWithException(e);
+        }
     }
 
-    @SuppressFBWarnings("EI_EXPOSE_REP")
-    public YamlDocument getSettings() {
-        return settings;
+    public Configuration getConfiguration() {
+        return configuration;
+    }
+
+    public Logger getLog()
+    {
+        return logger;
+    }
+
+    public DatabaseManager getDatabaseManager() {
+        return databaseManager;
+    }
+
+    public void disableWithException(Exception e)
+    {
+        getLogger().severe("Disabling InventoryManager du to the following error : ");
+        getLogger().severe(e.getLocalizedMessage());
+        Bukkit.getPluginManager().disablePlugin(this);
     }
 }

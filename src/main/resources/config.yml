@@ -1,20 +1,31 @@
-config-version: 1
+debug-log: false
 
-server-id: 'default'
+contexts:
+  - name: "survival_in_world_nether"
+    worlds:
+      - "world_nether"
+    gamemodes:
+      - "SURVIVAL"
+    inventory: "nether_survival_inventory"
 
-inventories:
-  'default':
+  - name: "creative_in_world_end"
     worlds:
-      - 'world'
-      - 'world_nether'
-      - 'world_the_end'
-    gamemode:
-      - 'survival'
-      - 'adventure'
-    strict-server: true
-  'creative':
-    worlds:
-      - '*'
-    gamemode:
-      - 'creative'
-    strict-server: false
+      - "world_the_end"
+    gamemodes:
+      - "CREATIVE"
+    inventory: "end_creative_inventory"
+
+default_contexts: "default_inventory"
+
+database:
+  type: "sqlite"  # "sqlite" ou "mysql"
+
+  sqlite:
+    file: "database.db"
+
+  mysql:
+    host: "localhost"
+    port: 3306
+    database: "inventory_manager"
+    username: "root"
+    password: "password"

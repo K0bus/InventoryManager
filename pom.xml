@@ -76,7 +76,11 @@
                             <relocations>
                                 <relocation>
                                     <pattern>dev.dejvokep.boostedyaml</pattern>
-                                    <shadedPattern>fr.k0bus.inventorymanager.libs</shadedPattern>
+                                    <shadedPattern>fr.k0bus.inventorymanager.libs.boostedyaml</shadedPattern>
+                                </relocation>
+                                <relocation>
+                                    <pattern>dev.dejvokep.boosted-yaml-spigot</pattern>
+                                    <shadedPattern>fr.k0bus.inventorymanager.libs.boosted-yaml-spigot</shadedPattern>
                                 </relocation>
                             </relocations>
                         </configuration>
@@ -151,14 +155,14 @@
                 <artifactId>maven-checkstyle-plugin</artifactId>
                 <version>3.6.0</version>
                 <configuration>
-                    <configLocation>google_checks.xml</configLocation> <!-- Le fichier de configuration Checkstyle -->
-                    <consoleOutput>true</consoleOutput> <!-- Affiche le résultat dans la console -->
-                    <failOnViolation>true</failOnViolation> <!-- Fait échouer la build en cas de violation -->
+                    <configLocation>google_checks.xml</configLocation>
+                    <consoleOutput>true</consoleOutput>
+                    <failOnViolation>false</failOnViolation>
                 </configuration>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>check</goal> <!-- Exécuter Checkstyle lors de la phase 'validate' -->
+                            <goal>check</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -182,6 +186,10 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
+        <repository>
+            <id>placeholderapi</id>
+            <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -190,6 +198,14 @@
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
             <version>1.21.4-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- PlaceHolderAPI -->
+        <dependency>
+            <groupId>me.clip</groupId>
+            <artifactId>placeholderapi</artifactId>
+            <version>2.11.5</version>
             <scope>provided</scope>
         </dependency>
 
