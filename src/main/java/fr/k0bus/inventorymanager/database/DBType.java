@@ -4,7 +4,7 @@ public enum DBType {
     MYSQL("mysql"),
     SQLITE("sqlite");
 
-    String id;
+    private final String id;
 
     DBType(String id) {
         this.id = id;

@@ -34,7 +34,7 @@ public class InventoryDAO {
             statement.executeUpdate();
             statement.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            InventoryManager.getStaticLogger().log(e.getMessage());
         }
     }
 
@@ -57,7 +57,7 @@ public class InventoryDAO {
             statement.close();
             resultSet.close();
         } catch (SQLException e) {
-            e.printStackTrace();
+            InventoryManager.getStaticLogger().log(e.getMessage());
         }
     }
 

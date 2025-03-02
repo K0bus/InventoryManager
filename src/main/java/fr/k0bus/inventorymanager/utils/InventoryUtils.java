@@ -1,7 +1,6 @@
 package fr.k0bus.inventorymanager.utils;
 
 import fr.k0bus.inventorymanager.InventoryManager;
-import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
@@ -22,7 +21,7 @@ public class InventoryUtils {
             }
             return Base64.getEncoder().encodeToString(outputStream.toByteArray());
         } catch (IOException e) {
-            e.printStackTrace();
+            InventoryManager.getStaticLogger().log(e.getMessage());
             return null;
         }
     }
@@ -37,7 +36,7 @@ public class InventoryUtils {
             }
             return inventory;
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            InventoryManager.getStaticLogger().log(e.getMessage());
             return new ItemStack[0];
         }
     }

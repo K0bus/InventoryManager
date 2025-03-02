@@ -1,14 +1,13 @@
 package fr.k0bus.inventorymanager.listener;
 
 import fr.k0bus.inventorymanager.InventoryManager;
-import fr.k0bus.inventorymanager.database.InventoryDAO;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerGameModeChangeEvent;
 
 public class GamemodeListener implements Listener {
 
-    private InventoryManager plugin;
+    private final InventoryManager plugin;
 
     public GamemodeListener(InventoryManager plugin)
     {

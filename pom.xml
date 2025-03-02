@@ -6,7 +6,7 @@
 
     <groupId>fr.k0bus</groupId>
     <artifactId>InventoryManager</artifactId>
-    <version>1.0-${build.number}</version>
+    <version>ALPHA-${build.number}</version>
     <packaging>jar</packaging>
 
     <name>InventoryManager</name>

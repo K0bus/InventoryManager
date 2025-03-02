@@ -63,6 +63,11 @@ public final class InventoryManager extends JavaPlugin {
         return logger;
     }
 
+    public static Logger getStaticLogger()
+    {
+        return logger;
+    }
+
     public DatabaseManager getDatabaseManager() {
         return databaseManager;
     }

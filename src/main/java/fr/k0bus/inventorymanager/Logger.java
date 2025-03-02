@@ -11,9 +11,9 @@ import org.bukkit.plugin.java.JavaPlugin;
  */
 public class Logger {
 
-    private JavaPlugin plugin;
-    private boolean debug = false;
-    private String tag;
+    private final JavaPlugin plugin;
+    private boolean debug;
+    private final String tag;
 
     /**
      * Constructor for the Logger class.
