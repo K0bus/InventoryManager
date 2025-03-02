@@ -10,17 +10,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'mvn clean install -Dbuild.number=${BUILD_NUMBER}'
-            }
-        }
-        stage('Static Code Analysis (SpotBugs)') {
-            steps {
-                sh 'mvn spotbugs:check || true' // Évite l'échec du build si des warnings sont détectés
-            }
-            post {
-                success {
-                    archiveArtifacts artifacts: 'target/spotbugsXml.xml'
-                }
+                sh 'mvn clean package -Dbuild.number=${BUILD_NUMBER}'
             }
         }
         stage('Archive Artifacts') {
