@@ -1,5 +1,6 @@
 package fr.k0bus.inventorymanager;
 
+import fr.k0bus.inventorymanager.commands.MainCommand;
 import fr.k0bus.inventorymanager.config.Configuration;
 import fr.k0bus.inventorymanager.database.DatabaseManager;
 import fr.k0bus.inventorymanager.database.InvalidDatabaseTypeException;
@@ -51,6 +52,8 @@ public final class InventoryManager extends JavaPlugin {
             if(Bukkit.getPluginManager().isPluginEnabled("AuthMe"))
                 getServer().getPluginManager().registerEvents(new AuthMeListener(this), this);
             logger.log("&7> &6&lListener registered");
+            new MainCommand(this).register(this);
+            logger.log("&7> &6&lCommands registered");
             logger.log("&aInitialization ended successfully !");
 
         } catch (IOException | SQLException | InvalidDatabaseTypeException e)
@@ -61,6 +64,15 @@ public final class InventoryManager extends JavaPlugin {
 
     public Configuration getConfiguration() {
         return configuration;
+    }
+
+    public void reloadConfig()
+    {
+        try {
+            configuration.reload();
+        } catch (IOException e) {
+            getLog().log(e.getLocalizedMessage());
+        }
     }
 
     public Logger getLog()
