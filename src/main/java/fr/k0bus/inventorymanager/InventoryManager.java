@@ -5,6 +5,7 @@ import fr.k0bus.inventorymanager.database.DatabaseManager;
 import fr.k0bus.inventorymanager.database.InvalidDatabaseTypeException;
 import fr.k0bus.inventorymanager.listener.AuthMeListener;
 import fr.k0bus.inventorymanager.listener.GamemodeListener;
+import fr.k0bus.inventorymanager.listener.LoginListener;
 import fr.k0bus.inventorymanager.listener.WorldChangeListener;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -46,6 +47,7 @@ public final class InventoryManager extends JavaPlugin {
             logger.log("&7> &6&lDatabase initialized");
             getServer().getPluginManager().registerEvents(new GamemodeListener(this), this);
             getServer().getPluginManager().registerEvents(new WorldChangeListener(this), this);
+            getServer().getPluginManager().registerEvents(new LoginListener(this), this);
             if(Bukkit.getPluginManager().isPluginEnabled("AuthMe"))
                 getServer().getPluginManager().registerEvents(new AuthMeListener(this), this);
             logger.log("&7> &6&lListener registered");
