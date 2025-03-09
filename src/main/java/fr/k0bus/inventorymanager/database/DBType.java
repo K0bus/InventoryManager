@@ -1,5 +1,7 @@
 package fr.k0bus.inventorymanager.database;
 
+import fr.k0bus.inventorymanager.exceptions.InvalidDatabaseTypeException;
+
 public enum DBType {
     MYSQL("mysql"),
     SQLITE("sqlite");

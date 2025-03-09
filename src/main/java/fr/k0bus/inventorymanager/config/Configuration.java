@@ -5,7 +5,7 @@ import dev.dejvokep.boostedyaml.settings.general.GeneralSettings;
 import dev.dejvokep.boostedyaml.spigot.SpigotSerializer;
 import fr.k0bus.inventorymanager.InventoryManager;
 import fr.k0bus.inventorymanager.database.DBType;
-import fr.k0bus.inventorymanager.database.InvalidDatabaseTypeException;
+import fr.k0bus.inventorymanager.exceptions.InvalidDatabaseTypeException;
 import org.bukkit.GameMode;
 import org.bukkit.World;
 

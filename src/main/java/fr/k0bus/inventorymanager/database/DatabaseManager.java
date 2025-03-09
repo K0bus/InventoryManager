@@ -1,6 +1,7 @@
 package fr.k0bus.inventorymanager.database;
 
 import fr.k0bus.inventorymanager.InventoryManager;
+import fr.k0bus.inventorymanager.exceptions.InvalidDatabaseTypeException;
 
 import java.io.File;
 import java.sql.Connection;

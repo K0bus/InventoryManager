@@ -1,4 +1,4 @@
-package fr.k0bus.inventorymanager.database;
+package fr.k0bus.inventorymanager.exceptions;
 
 public class InvalidDatabaseTypeException  extends Exception{
     public InvalidDatabaseTypeException (String databaseType)

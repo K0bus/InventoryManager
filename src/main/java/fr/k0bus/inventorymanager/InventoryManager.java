@@ -3,7 +3,7 @@ package fr.k0bus.inventorymanager;
 import fr.k0bus.inventorymanager.commands.MainCommand;
 import fr.k0bus.inventorymanager.config.Configuration;
 import fr.k0bus.inventorymanager.database.DatabaseManager;
-import fr.k0bus.inventorymanager.database.InvalidDatabaseTypeException;
+import fr.k0bus.inventorymanager.exceptions.InvalidDatabaseTypeException;
 import fr.k0bus.inventorymanager.listener.AuthMeListener;
 import fr.k0bus.inventorymanager.listener.GamemodeListener;
 import fr.k0bus.inventorymanager.listener.LoginListener;
