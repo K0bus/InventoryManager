@@ -8,6 +8,16 @@ pipeline {
         disableConcurrentBuilds()
     }
     stages {
+        stage('CheckStyle') {
+            steps {
+                sh 'mvn checkstyle:check'
+            }
+        }
+        stage('Test') {
+            steps {
+                sh 'mvn surefire:test'
+            }
+        }
         stage('Build') {
             steps {
                 sh 'mvn clean package -Dbuild.number=${BUILD_NUMBER}'
