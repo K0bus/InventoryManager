@@ -1,11 +1,9 @@
 package fr.k0bus.inventorymanager.utils;
 
-import fr.k0bus.inventorymanager.InventoryManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockbukkit.mockbukkit.MockBukkit;
-import org.mockbukkit.mockbukkit.ServerMock;
 
 import static org.junit.jupiter.api.Assertions.*;
 
