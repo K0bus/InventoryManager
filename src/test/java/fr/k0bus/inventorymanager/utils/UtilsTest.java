@@ -1,6 +1,5 @@
 package fr.k0bus.inventorymanager.utils;
 
-import fr.k0bus.inventorymanager.InventoryManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
